@@ -14,7 +14,7 @@ if (!("nei" %in% ls())) {
 
 emissionSummary = ddply(nei, .(year), summarise, totalEmissions = sum(Emissions))
 
-png("plot1.png", width = 450, height = 450)
-with(emissionSummary, plot(year, totalEmissions, xlab = "Year", ylab = "Total PM2.5 Emissions (tons)", type = "l", col = "red", lwd = 3, xaxt = "n"))
+png("plot1.png")
+with(emissionSummary, plot(year, totalEmissions, main = "Total PM2.5 Emissions by Year", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)", type = "l", col = "red", cex.lab = 1.2, lwd = 3, xaxt = "n"))
 axis(side = 1, at = emissionSummary$year)
 dev.off()
