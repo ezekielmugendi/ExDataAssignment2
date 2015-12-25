@@ -15,7 +15,7 @@ scc_coal_ids = scc$SCC[grep("^fuel comb -.*- coal$", scc$EI.Sector, ignore.case 
 coalEmissions = ddply(subset(nei, SCC %in% scc_coal_ids), .(year), summarize, totalEmissions = sum(Emissions))
 
 png("plot4.png")
-p = qplot(year, totalEmissions, data = coalEmissions, geom = "line", main = "Total Coal Combustion PM2.5 Emissions by Year", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)")
+p = qplot(year, totalEmissions, data = coalEmissions, geom = "line", main = "Total Coal Combustion-Related PM2.5 Emissions by Year", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)")
 p = p + scale_x_continuous(breaks = coalEmissions$year)
 print(p)
 dev.off()
