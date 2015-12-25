@@ -8,9 +8,7 @@ if (!file.exists("Source_Classification_Code.rds") | !file.exists("summarySCC_PM
   unlink(tmp)
 }
 
-if (!("nei" %in% ls())) {
-  nei = readRDS("summarySCC_PM25.rds")
-}
+nei = readRDS("summarySCC_PM25.rds")
 
 emissionSummary = ddply(nei, .(year), summarise, totalEmissions = sum(Emissions))
 
