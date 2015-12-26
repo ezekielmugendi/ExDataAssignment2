@@ -14,7 +14,7 @@ nei = readRDS("summarySCC_PM25.rds")
 baltTypeSummary = ddply(subset(nei, fips == "24510"), .(year, type), summarise, totalEmissions = sum(Emissions))
 
 png("plot3.png")
-p = qplot(year, totalEmissions, data = baltTypeSummary, geom = "line", main = "Total PM2.5 Emissions In Baltimore City by Year, Type", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)")
+p = qplot(year, totalEmissions, data = baltTypeSummary, geom = "line", main = "Baltimore PM2.5 Emissions by Type: 1999-2008", xlab = "Year", ylab = "Emissions (tons)")
 p = p + facet_wrap(~type, scales = "free_y")
 p = p + scale_x_continuous(breaks = c(1999, 2002, 2005, 2008))
 print(p)

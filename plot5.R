@@ -16,7 +16,7 @@ scc_motor_vehicle_ids = scc$SCC[grep("^mobile - on-road .* vehicles$", scc$EI.Se
 mvEmissions = ddply(subset(nei, fips == "24510" & SCC %in% scc_motor_vehicle_ids), .(year), summarize, totalEmissions = sum(Emissions))
 
 png("plot5.png")
-p = qplot(year, totalEmissions, data = mvEmissions, geom = "line", main = "Total Motor Vehicle-Related PM2.5 Emissions in Baltimore by Year", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)")
+p = qplot(year, totalEmissions, data = mvEmissions, geom = "line", main = "Baltimore Motor Vehicle-Related PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)")
 p = p + scale_x_continuous(breaks = mvEmissions$year)
 print(p)
 dev.off()

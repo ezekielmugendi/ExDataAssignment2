@@ -13,6 +13,6 @@ nei = readRDS("summarySCC_PM25.rds")
 baltSummary = ddply(subset(nei, fips == "24510"), .(year), summarise, totalEmissions = sum(Emissions))
 
 png("plot2.png")
-with(baltSummary, plot(year, totalEmissions, type = "l", main = "Total PM2.5 Emissions In Baltimore City by Year", xlab = "Year", ylab = "Total PM2.5 Emissions (tons)", col = "red", cex.lab = 1.2, lwd = 3, xaxt = "n"))
+with(baltSummary, plot(year, totalEmissions, type = "l", main = "Baltimore PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)", col = "red", cex.lab = 1.2, lwd = 3, xaxt = "n"))
 axis(side = 1, at = baltSummary$year)
 dev.off()
