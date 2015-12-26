@@ -1,1 +1,2 @@
-# Exploratory Data Analysis Programming Assignment 2
+# Exploratory Data Analysis
+## Programming Assignment 2
