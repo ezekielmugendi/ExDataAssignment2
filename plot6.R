@@ -13,7 +13,7 @@ nei = readRDS("summarySCC_PM25.rds")
 scc = readRDS("Source_Classification_Code.rds")
 
 scc_motor_vehicle_ids = scc$SCC[grep("^mobile - on-road .* vehicles$", scc$EI.Sector, ignore.case = T)]
-baltAndLaMvEmissions = ddply(subset(nei, fips == "24510" | fips == "06037" & SCC %in% scc_motor_vehicle_ids), .(year, fips), summarize, totalEmissions = sum(Emissions))
+baltAndLaMvEmissions = ddply(subset(nei, (fips == "24510" | fips == "06037") & SCC %in% scc_motor_vehicle_ids), .(year, fips), summarize, totalEmissions = sum(Emissions))
 
 baltAndLaMvEmissions$year = as.factor(baltAndLaMvEmissions$year)
 baltAndLaMvEmissions$fips = as.factor(baltAndLaMvEmissions$fips)
@@ -24,10 +24,11 @@ levels(baltAndLaMvEmissions$fips) = c("Los Angeles County", "Baltimore City")
 # laMvEmissions = splitEmisisons$`06037`
 
 png("plot6.png")
-p = ggplot(baltAndLaMvEmissions, aes(x = year, y = totalEmissions, group = fips, colour = fips))
+p = ggplot(baltAndLaMvEmissions, aes(x = year, y = totalEmissions, group = fips))
 p = p + geom_line()
 p = p + geom_point()
-p = p + scale_colour_discrete(name = "Location")
+# p = p + scale_colour_discrete(name = "Location")
+p = p + facet_wrap(~fips, scales = "free_y")
 p = p + ggtitle(expression(atop("Motor Vehicle-Related PM2.5 Emissions", atop(italic("Los Angeles, CA vs Baltimore, MD: 1999-2008")))))
 p = p + xlab("Year")
 p = p + ylab("Emissions (tons)")
