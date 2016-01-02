@@ -15,6 +15,7 @@ baltTypeSummary = ddply(subset(nei, fips == "24510"), .(year, type), summarise, 
 
 png("plot3.png")
 p = qplot(year, totalEmissions, data = baltTypeSummary, geom = "line", main = "Baltimore PM2.5 Emissions by Type: 1999-2008", xlab = "Year", ylab = "Emissions (tons)")
+p = p + geom_point()
 p = p + facet_wrap(~type, scales = "free_y")
 p = p + scale_x_continuous(breaks = c(1999, 2002, 2005, 2008))
 print(p)

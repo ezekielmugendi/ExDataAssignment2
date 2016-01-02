@@ -18,5 +18,6 @@ coalEmissions = ddply(subset(nei, SCC %in% scc_coal_ids), .(year), summarize, to
 png("plot4.png")
 p = qplot(year, totalEmissions, data = coalEmissions, geom = "line", main = "US Coal Combustion-Related PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)")
 p = p + scale_x_continuous(breaks = coalEmissions$year)
+p = p + geom_point()
 print(p)
 dev.off()

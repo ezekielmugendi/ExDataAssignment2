@@ -17,6 +17,7 @@ mvEmissions = ddply(subset(nei, fips == "24510" & SCC %in% scc_motor_vehicle_ids
 
 png("plot5.png")
 p = qplot(year, totalEmissions, data = mvEmissions, geom = "line", main = "Baltimore Motor Vehicle-Related PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)")
+p = p + geom_point()
 p = p + scale_x_continuous(breaks = mvEmissions$year)
 print(p)
 dev.off()
