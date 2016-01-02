@@ -1,3 +1,4 @@
+library(plyr)
 library(dplyr)
 library(ggplot2)
 
@@ -16,9 +17,6 @@ scc_motor_vehicle_ids = scc$SCC[grep("^mobile - on-road .* vehicles$", scc$EI.Se
 baltAndLaMvEmissions = ddply(subset(nei, (fips == "24510" | fips == "06037") & SCC %in% scc_motor_vehicle_ids), .(year, fips), summarize, totalEmissions = sum(Emissions))
 
 baltAndLaMvEmissions = mutate(baltAndLaMvEmissions, year = factor(year), fips = factor(fips, labels = c("Los Angeles County", "Baltimore City")))
-# baltAndLaMvEmissions$year = as.factor(baltAndLaMvEmissions$year)
-# baltAndLaMvEmissions$fips = as.factor(baltAndLaMvEmissions$fips)
-# levels(baltAndLaMvEmissions$fips) = c("Los Angeles County", "Baltimore City")
 
 # splitEmisisons = split(baltAndLaMvEmissions, baltAndLaMvEmissions$fips)
 # baltMvEmissions = splitEmisisons$`24510`
@@ -28,7 +26,6 @@ png("plot6.png")
 p = ggplot(baltAndLaMvEmissions, aes(x = year, y = totalEmissions, group = fips))
 p = p + geom_line()
 p = p + geom_point()
-# p = p + scale_colour_discrete(name = "Location")
 p = p + facet_wrap(~fips, scales = "free_y")
 p = p + ggtitle(expression(atop("Motor Vehicle-Related PM2.5 Emissions", atop(italic("Los Angeles, CA vs Baltimore, MD: 1999-2008")))))
 p = p + xlab("Year")

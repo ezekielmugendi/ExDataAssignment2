@@ -1,4 +1,4 @@
-library(dplyr)
+library(plyr)
 library(ggplot2)
 
 if (!file.exists("Source_Classification_Code.rds") | !file.exists("summarySCC_PM25.rds")) {

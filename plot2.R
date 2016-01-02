@@ -1,6 +1,6 @@
-library(dplyr)
+library(plyr)
 
-if (!file.exists("Source_Classification_Code.rds") | !file.exists("summarySCC_PM25.rds")) {
+if (!file.exists("Source_Classification_Code.rds")) {
   dataUrl = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
   tmp = tempfile()
   download.file(dataUrl, tmp)
@@ -13,6 +13,6 @@ nei = readRDS("summarySCC_PM25.rds")
 baltSummary = ddply(subset(nei, fips == "24510"), .(year), summarise, totalEmissions = sum(Emissions))
 
 png("plot2.png")
-with(baltSummary, plot(year, totalEmissions, type = "l", main = "Baltimore PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)", col = "red", cex.lab = 1.2, lwd = 3, xaxt = "n"))
+with(baltSummary, plot(year, totalEmissions, type = "b", main = "Baltimore PM2.5 Emissions: 1999-2008", xlab = "Year", ylab = "Emissions (tons)", col = "red", cex.lab = 1.2, lwd = 3, xaxt = "n"))
 axis(side = 1, at = baltSummary$year)
 dev.off()
